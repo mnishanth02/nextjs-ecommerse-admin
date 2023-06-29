@@ -1,15 +1,24 @@
 import { useSession, signIn } from 'next-auth/react';
+
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Nav from './nav';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 export function Layout({ children }) {
   const { data: session } = useSession();
 
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {},
+    },
+  });
+
   if (!session) {
     return (
-      <div className="bg-blue-900 h-screen w-screen flex items-center">
-        <div className="text-center w-full">
+      <div className="flex items-center w-screen h-screen bg-blue-900">
+        <div className="w-full text-center">
           <button
-            className="bg-white p-2 px-4 rounded-lg"
+            className="p-2 px-4 bg-white rounded-lg"
             onClick={() => signIn('google')}
           >
             Login with Google
@@ -20,11 +29,14 @@ export function Layout({ children }) {
   }
 
   return (
-    <div className="bg-blue-900 h-screen w-screen flex">
-      <Nav />
-      <div className="bg-white flex-grow mt-2 mr-2 mb-2 rounded-lg p-4">
-        {children}
-      </div>
+    <div className="flex w-screen h-screen bg-blue-900">
+      <QueryClientProvider client={queryClient}>
+        <Nav />
+        <div className="flex-grow p-4 mt-2 mb-2 mr-2 bg-white rounded-lg">
+          {children}
+        </div>
+        <ReactQueryDevtools />
+      </QueryClientProvider>
     </div>
   );
 }

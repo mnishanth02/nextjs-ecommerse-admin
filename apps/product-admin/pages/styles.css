@@ -29,10 +29,8 @@ pre {
   border-style: solid;
   border-color: currentColor;
 }
-h1,
-h2 {
-  font-size: inherit;
-  font-weight: inherit;
+h1 {
+  @apply mb-2 text-xl text-blue-900;
 }
 a {
   color: inherit;
@@ -55,4 +53,38 @@ pre {
     Liberation Mono, Courier New, monospace;
   overflow: scroll;
   padding: 0.5rem 0.75rem;
+}
+
+input,
+textarea {
+  @apply w-full px-1 py-1.5 mb-2 border border-gray-400 rounded-md;
+}
+
+input:focus,
+textarea:focus {
+  @apply border-blue-900;
+}
+
+label {
+  @apply text-blue-900;
+}
+
+.btn-primary {
+  @apply px-4 py-2 text-white bg-blue-900 rounded-md;
+}
+
+table.basic {
+  @apply w-full;
+}
+
+table.basic thead tr td {
+  @apply bg-blue-100;
+}
+
+table.basic tr td {
+  @apply p-1 border border-blue-200;
+}
+
+table.basic a {
+  @apply inline-flex gap-1 p-1 px-2 text-sm text-white bg-blue-900 rounded-md;
 }
