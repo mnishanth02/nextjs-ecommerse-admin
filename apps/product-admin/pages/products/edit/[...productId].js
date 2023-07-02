@@ -15,20 +15,20 @@ function EditProduct() {
 
   const { data, isLoading, isError, error } = useQuery(
     ['products', 'edit', productId],
-    () => getProductByID(productId),
-    {
-      initialData: () => {
-        const product = queryClient
-          .getQueryData(['products'])
-          ?.find((product) => product._id === parseInt(productId));
+    () => getProductByID(productId)
+    // {
+    //   initialData: () => {
+    //     const product = queryClient
+    //       .getQueryData(['products'])
+    //       ?.find((product) => product._id === parseInt(productId));
 
-        if (product) {
-          return { data: product };
-        } else {
-          return undefined;
-        }
-      },
-    }
+    //     if (product) {
+    //       return { data: product };
+    //     } else {
+    //       return undefined;
+    //     }
+    //   },
+    // }
   );
 
   if (isLoading) {

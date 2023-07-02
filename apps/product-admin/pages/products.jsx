@@ -9,10 +9,7 @@ const getProducts = async () => {
 function Products() {
   const { data, isLoading, isError, error } = useQuery(
     ['products'],
-    getProducts,
-    {
-      staleTime: 1000 * 30,
-    }
+    getProducts
   );
 
   if (isLoading) {
